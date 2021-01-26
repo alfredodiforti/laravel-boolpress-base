@@ -7,6 +7,7 @@
         <h2>{{$pet->nome}}</h2>
         <h3>{{$pet->razza}}</h3>
         <h5>{{$pet->created_at->format('d/m/Y ')}}</h5>
+        <a href="{{ route('pets.show', $pet->slug)}}"> see more</a>
     </article>
         
     @empty
