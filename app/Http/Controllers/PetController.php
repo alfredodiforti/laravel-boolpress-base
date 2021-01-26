@@ -48,6 +48,7 @@ class PetController extends Controller
         // è presente ?
         if(!empty($data['img'])) {
             $data['img'] = Storage::disk('public')->put('images', $data['img']);
+        }
 
             // salvataggio nel db
             $newpuppy = new Pets();
@@ -63,7 +64,7 @@ class PetController extends Controller
 
 
 
-        }
+        
 
 
     }
@@ -86,9 +87,10 @@ class PetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $pet = Pets::where('slug', $slug)->first();
+        return view('pets.edit', compact('pet'));
     }
 
     /**
@@ -100,8 +102,30 @@ class PetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        //get data
+        $data = $request->all();
+        //validazione
+        $request->validate($this->Supervalidation());
+        //get post
+        $post = Pets::find($id);
+        //slug
+        $data['slug'] = Str::slug($data['nome'], '-');
+        //img if change
+        if(!empty($data['img'])) {
+            if (!empty($pet->img)) {
+                Storage::disk('public')->delete($pet->img);
+            }
+            $data['img'] = Storage::disk('public')->put('image', $data['img']);
+        }
+        $updateted = $pet->update($data);
+        
+
+
+        }
+
+
+
+    
 
     /**
      * Remove the specified resource from storage.
