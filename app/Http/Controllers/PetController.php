@@ -6,6 +6,7 @@ use App\Pets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage; 
+use App\Vaccino;
 
 class PetController extends Controller
 {
@@ -27,7 +28,9 @@ class PetController extends Controller
      */
     public function create()
     {
-        return view('pets.create');
+        $vaccini = Vaccino::all(); //richiamo il modello con tutte cose 
+
+        return view('pets.create', compact('vaccini'));
     }
 
     /**
@@ -57,6 +60,9 @@ class PetController extends Controller
             $saved = $newpuppy->save();
 
             if($saved) {
+                if (!empty($data['vaccini'])) {
+                    $newpuppy->vaccinos()->attach($data['vaccini']);
+                }
                 return redirect(route('pets.index'));
             } else {
                 return redirect(route('homepage'));

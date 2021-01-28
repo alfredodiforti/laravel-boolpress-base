@@ -39,7 +39,7 @@
         <input type="file" name="img" id="img" accept="image/*">
     </div>
     <div>
-        <input type="UPDATE" value="update pets">
+        <input type="update" value="update pets">
     </div>
 
 

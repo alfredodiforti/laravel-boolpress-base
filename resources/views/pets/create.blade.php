@@ -27,6 +27,15 @@
      <option value="1">SI</option>
      <option value="0">NO</option>
     </select>
+     {{-- vaccini --}}
+
+     <div>
+         <h3>Vaccini eseguiti</h3>
+         @foreach ($vaccini as $vaccino)
+         <input type="checkbox" name="vaccini[]" id="tag-{{$vaccino->id}}" value="{{$vaccino->id}}">
+         <label for="tag-{{$vaccino->id}}">{{$vaccino->name}}</label>
+         @endforeach      
+     </div>
     <div> 
         <label for="img">img</label>
         <input type="file" name="img" id="img" accept="image/*">

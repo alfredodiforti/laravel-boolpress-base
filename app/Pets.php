@@ -15,4 +15,11 @@ class Pets extends Model
         'slug',
         'img',
     ];
+
+    // relazione many to many pets - vaccinos
+
+   public function vaccinos()
+   {
+       return $this->belongsToMany('App\Vaccino');
+   }
 }
