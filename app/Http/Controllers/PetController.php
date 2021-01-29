@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Pets;
+use App\Pet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage; 
@@ -17,7 +17,7 @@ class PetController extends Controller
      */
     public function index()
     {
-        $pets = Pets::orderBy('created_at', 'desc')->get();
+        $pets = Pet::orderBy('created_at', 'desc')->get();
         return view('pets.index', compact('pets')); 
     }
 
@@ -54,7 +54,7 @@ class PetController extends Controller
         }
 
             // salvataggio nel db
-            $newpuppy = new Pets();
+            $newpuppy = new Pet();
             $newpuppy->fill($data); //richiede fillable nel model
             //salvataggio
             $saved = $newpuppy->save();
@@ -83,7 +83,7 @@ class PetController extends Controller
      */
     public function show($slug)
     {
-        $pet = Pets::where('slug', $slug)->first();
+        $pet = Pet::where('slug', $slug)->first();
         return view('pets.show', compact('pet'));
     }
 
@@ -95,7 +95,7 @@ class PetController extends Controller
      */
     public function edit($slug)
     {
-        $pet = Pets::where('slug', $slug)->first();
+        $pet = Pet::where('slug', $slug)->first();
         return view('pets.edit', compact('pet'));
     }
 
@@ -113,7 +113,7 @@ class PetController extends Controller
         //validazione
         $request->validate($this->Supervalidation());
         //get post
-        $post = Pets::find($id);
+        $post = Pet::find($id);
         //slug
         $data['slug'] = Str::slug($data['nome'], '-');
         //img if change

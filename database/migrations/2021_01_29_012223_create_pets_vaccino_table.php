@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePetVaccinoTable extends Migration
+class CreatePetsVaccinoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -30,6 +30,6 @@ class CreatePetVaccinoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pet_vaccino');
+        Schema::dropIfExists('pets_vaccino');
     }
 }
